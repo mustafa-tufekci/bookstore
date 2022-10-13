@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.BookOperations.CreateBook;
+using WebApi.BookOperations.DeleteBook;
 using WebApi.BookOperations.GetBookDetail;
 using WebApi.BookOperations.GetBooks;
+using WebApi.BookOperations.UpdateBook;
 using WebApi.DBOperations;
 using WebApi.DeleteBook;
 using WebApi.UpdateBook;
@@ -56,7 +60,22 @@ namespace BookStore.Controllers
             try
             {
                 command.Model = newBook;
+                CreateBookCommandValidator validator = new CreateBookCommandValidator();
+                validator.ValidateAndThrow(command);
                 command.Handle();
+
+                //if (!result.IsValid)
+                //{
+                //    foreach (var item in result.Errors)
+                //    {
+                //        Console.WriteLine("Property " + item.PropertyName + "- Error Message: " + item.ErrorMessage);
+                //    }
+                //}
+                //else
+                //{
+                //    command.Handle();
+                //}
+
             }
             catch (Exception ex)
             {
@@ -74,6 +93,9 @@ namespace BookStore.Controllers
                 UpdateBookCommand command = new UpdateBookCommand(_context);
                 command.BookId = id;
                 command.Model = updatedBook;
+
+                UpdateBookCommandValidator validator = new UpdateBookCommandValidator();
+                validator.ValidateAndThrow(command);
                 command.Handle();
             }
             catch (Exception ex)
@@ -90,6 +112,8 @@ namespace BookStore.Controllers
             {
                 DeleteBookCommand command = new DeleteBookCommand(_context);
                 command.BookId = id;
+                DeleteBookCommandValidator validator = new DeleteBookCommandValidator();
+                validator.ValidateAndThrow(command);
                 command.Handle();
             }
             catch (Exception ex)
