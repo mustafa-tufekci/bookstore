@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using BookStore;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
+using WebApi.Entities;
 
 namespace WebApi.BookOperations.CreateBook
 {

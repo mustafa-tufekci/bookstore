@@ -1,4 +1,5 @@
 ﻿using BookStore;
+using WebApi.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.DBOperations
@@ -13,13 +14,27 @@ namespace WebApi.DBOperations
                 {
                     return;
                 }
+                context.Genres.AddRange(
+                    new Genre
+                    {
+                        Name = "Personal Growth"
+                    },
+                    new Genre
+                    {
+                        Name = "Science Fiction"
+                    },
+                    new Genre
+                    {
+                        Name = "Noval"
+                    }
+                );
 
                 context.Books.AddRange(
                 new Book
                 {
                     //Id = 1,
                     Title = "Lean Startup",
-                    GenreId = 1, //Personal Growth
+                    GenreId = 1, 
                     PageCount = 200,
                     PublishDate = new DateTime(2001, 06, 14)
                 },
@@ -27,7 +42,7 @@ namespace WebApi.DBOperations
                 {
                     //Id = 2,
                     Title = "Herland",
-                    GenreId = 2, //Science Fiction
+                    GenreId = 2,
                     PageCount = 200,
                     PublishDate = new DateTime(2010, 05, 13)
                 },
@@ -35,7 +50,7 @@ namespace WebApi.DBOperations
                 {
                     //Id = 3,
                     Title = "Dune",
-                    GenreId = 1, //Personal Growth
+                    GenreId = 1, 
                     PageCount = 150,
                     PublishDate = new DateTime(2001, 12, 15)
                 });
