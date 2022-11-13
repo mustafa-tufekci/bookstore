@@ -51,7 +51,7 @@ namespace WebApi.Controllers
             validator.ValidateAndThrow(command);
 
             command.Handle();
-            return Ok(command);
+            return Ok();
         }
         [HttpPut("id")]
         public IActionResult UpdateGenre(int id, [FromBody] UpdateGenreModel updateGenre)

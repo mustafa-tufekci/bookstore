@@ -5,12 +5,11 @@ namespace WebApi.DBOperations
 {
     public class BookStoreDbContext : DbContext
     {
-        private Func<DbContextOptions> getRequiredService;
-
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options) : base(options)
         { }
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Author> Authors { get; set; }
     }
 }
