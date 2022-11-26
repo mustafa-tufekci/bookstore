@@ -9,9 +9,9 @@ namespace WebApi.BookOperations.CreateBook
     {
         public CreateBookModel Model { get; set; }
 
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
-        public CreateBookCommand(BookStoreDbContext dbContext, IMapper mapper)
+        public CreateBookCommand(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -23,7 +23,7 @@ namespace WebApi.BookOperations.CreateBook
 
             if (book is not null)
             {
-                throw new InvalidOperationException("Kitap zaten mevcut");
+                throw new InvalidOperationException("Kitap zaten mevcut.");
             }
             book = _mapper.Map<Book>(Model); //new Book();
             //book.Title = Model.Title;
